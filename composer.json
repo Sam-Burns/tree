@@ -1,0 +1,18 @@
+{
+    "name": "Sam-Burns/tree",
+
+    "version": "0.0.1",
+
+    "licence": "MIT",
+
+    "require-dev": {
+        "phpunit/phpunit": "~4.4.2",
+        "phpspec/phpspec": "~2.1.1"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "\\Tree": "src/"
+        }
+    }
+}
