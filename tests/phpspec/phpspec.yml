@@ -1,0 +1,8 @@
+suites:
+
+    Tree:
+        #namespace: Tree
+        spec_prefix: TreeSpecs
+        src_path: src
+        spec_path:  tests/phpspec
+        #psr4_prefix: AwinServices\Modules\Index
