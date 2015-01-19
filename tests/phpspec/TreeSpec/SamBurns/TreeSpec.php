@@ -11,7 +11,11 @@ class TreeSpec extends ObjectBehavior
     {
         $initialArray = array(
             'node' => array(
-                'initial-leaf-node' => 123
+                'initial-leaf-node' => 'orig',
+                'another-node'      => array(
+                    'another-leaf'     => 'orig',
+                    'yet-another-leaf' => 'orig'
+                )
             )
         );
 
@@ -27,7 +31,11 @@ class TreeSpec extends ObjectBehavior
     {
         $expectedArray = array(
             'node' => array(
-                'initial-leaf-node' => 123
+                'initial-leaf-node' => 'orig',
+                'another-node'      => array(
+                    'another-leaf'     => 'orig',
+                    'yet-another-leaf' => 'orig'
+                )
             )
         );
 
@@ -36,14 +44,41 @@ class TreeSpec extends ObjectBehavior
 
     function it_can_merge_with_an_array()
     {
-        $dataArray = array('node' => array('new-leaf-node' => 456));
+        $newDataArray = array('node' => array('new-leaf-node' => 'new'));
         $expectedResultArray = array(
             'node' => array(
-                'new-leaf-node'     => 456,
-                'initial-leaf-node' => 123
+                'new-leaf-node' => 'new',
+                'another-node'  => array(
+                    'another-leaf'     => 'orig',
+                    'yet-another-leaf' => 'orig'
+                ),
+                'initial-leaf-node' => 'orig'
             )
         );
 
-        $this->mergeWithArray($dataArray)->shouldBeLike(new Tree($expectedResultArray));
+        $this->mergeWithArray($newDataArray)->shouldBeLike(new Tree($expectedResultArray));
+    }
+
+    function merging_with_an_array_prioritises_new_array_when_there_are_key_clashes()
+    {
+        $newDataArray = array(
+            'node' => array(
+                'another-node' => array(
+                    'another-leaf'    => 'new'
+                )
+            )
+        );
+
+        $expectedArray = array(
+            'node' => array(
+                'initial-leaf-node' => 'orig',
+                'another-node'      => array(
+                    'another-leaf'     => 'new',
+                    'yet-another-leaf' => 'orig'
+                )
+            )
+        );
+
+        $this->mergeWithArray($newDataArray)->shouldBeLike(new Tree($expectedArray));
     }
 }
