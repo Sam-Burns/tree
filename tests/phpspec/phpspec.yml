@@ -1,8 +1,7 @@
 suites:
 
-    Tree:
-        #namespace: Tree
-        spec_prefix: TreeSpecs
-        src_path: src
-        spec_path:  tests/phpspec
-        #psr4_prefix: AwinServices\Modules\Index
+    Main:
+        namespace: SamBurns
+        spec_prefix: TreeSpec
+        src_path: src/
+        spec_path:  tests/phpspec/
