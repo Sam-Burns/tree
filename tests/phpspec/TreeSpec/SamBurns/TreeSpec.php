@@ -34,7 +34,7 @@ class TreeSpec extends ObjectBehavior
         $this->toArray()->shouldBeLike($expectedArray);
     }
 
-    function it_can_have_array_added()
+    function it_can_merge_with_an_array()
     {
         $dataArray = array('node' => array('new-leaf-node' => 456));
         $expectedResultArray = array(
@@ -44,6 +44,6 @@ class TreeSpec extends ObjectBehavior
             )
         );
 
-        $this->addArray($dataArray)->shouldBeLike(new Tree($expectedResultArray));
+        $this->mergeWithArray($dataArray)->shouldBeLike(new Tree($expectedResultArray));
     }
 }

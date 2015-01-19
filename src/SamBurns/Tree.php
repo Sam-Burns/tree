@@ -49,7 +49,7 @@ class Tree
      * @param array $arrayToMergeIn
      * @return Tree
      */
-    public function addArray($arrayToMergeIn)
+    public function mergeWithArray($arrayToMergeIn)
     {
         return new Tree(
             array_merge_recursive(
