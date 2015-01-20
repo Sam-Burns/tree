@@ -2,7 +2,7 @@
 namespace SamBurns\Tree;
 
 use SamBurns\Tree;
-use SamBurns\Tree\File\FileFactory;
+use SamBurns\Tree\FileParsing\FileFactory;
 
 class Config implements Tree, ConfigFromFile
 {
@@ -12,6 +12,9 @@ class Config implements Tree, ConfigFromFile
     /** @var FileFactory */
     private $fileFactory;
 
+    /**
+     * @param FileFactory $fileFactory
+     */
     public function __construct(FileFactory $fileFactory)
     {
         $this->fileFactory = $fileFactory;
@@ -33,5 +36,10 @@ class Config implements Tree, ConfigFromFile
     {
         $this->tree = $this->tree->mergeWithArray($arrayToMergeIn);
         return $this;
+    }
+
+    public function populateFromFile($argument1)
+    {
+        // TODO: write logic here
     }
 }
