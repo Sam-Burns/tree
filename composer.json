@@ -5,6 +5,10 @@
 
     "licence": "MIT",
 
+    "require": {
+        "zendframework/zend-config": "2.2.6"
+    },
+
     "require-dev": {
         "phpunit/phpunit": "~4.4.2",
         "phpspec/phpspec": "~2.1.1"

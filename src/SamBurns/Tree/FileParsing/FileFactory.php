@@ -5,6 +5,7 @@ use SamBurns\Tree\FileParsing\File\JsonFile;
 use SamBurns\Tree\FileParsing\File\PhpArrayFile;
 use SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist;
 use SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType;
+use SamBurns\Tree\FileParsing\File\XmlFile;
 
 class FileFactory
 {
@@ -30,6 +31,8 @@ class FileFactory
                 return new JsonFile($path);
             case 'php':
                 return new PhpArrayFile($path);
+            case 'xml':
+                return new XmlFile($path);
         }
 
         $exception = new CannotParseFileType();

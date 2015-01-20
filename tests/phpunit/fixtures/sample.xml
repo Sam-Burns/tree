@@ -1,4 +1,6 @@
 <?xml version='1.0'?>
-<root-node>
-    <sub-node>leaf</sub-node>
-</root-node>
+<config>
+    <root-node>
+        <sub-node>leaf</sub-node>
+    </root-node>
+</config>

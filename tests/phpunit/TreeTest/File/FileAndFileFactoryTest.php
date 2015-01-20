@@ -31,7 +31,7 @@ class FileFactoryTest extends PHPUnit_Framework_TestCase
         return array(
             array(__DIR__ . '/../../fixtures/sample.json'),
             array(__DIR__ . '/../../fixtures/sample.php'),
-//            array(__DIR__ . '/../../fixtures/sample.xml'),
+            array(__DIR__ . '/../../fixtures/sample.xml'),
         );
     }
 
