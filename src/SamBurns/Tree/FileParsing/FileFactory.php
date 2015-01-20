@@ -6,6 +6,7 @@ use SamBurns\Tree\FileParsing\File\PhpArrayFile;
 use SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist;
 use SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType;
 use SamBurns\Tree\FileParsing\File\XmlFile;
+use SamBurns\Tree\FileParsing\File\YamlFile;
 
 class FileFactory
 {
@@ -33,6 +34,8 @@ class FileFactory
                 return new PhpArrayFile($path);
             case 'xml':
                 return new XmlFile($path);
+            case 'yml':
+                return new YamlFile($path);
         }
 
         $exception = new CannotParseFileType();
