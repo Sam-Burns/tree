@@ -2,11 +2,20 @@
 namespace SamBurns\Tree;
 
 use SamBurns\Tree;
+use SamBurns\Tree\File\FileFactory;
 
-class Config implements Tree, ConfigTree
+class Config implements Tree, ConfigFromFile
 {
     /** @var BasicTree */
     private $tree;
+
+    /** @var FileFactory */
+    private $fileFactory;
+
+    public function __construct(FileFactory $fileFactory)
+    {
+        $this->fileFactory = $fileFactory;
+    }
 
     /**
      * @return array
