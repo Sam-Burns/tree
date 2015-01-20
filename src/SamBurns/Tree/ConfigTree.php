@@ -1,7 +1,7 @@
 <?php
-namespace SamBurns;
+namespace SamBurns\Tree;
 
-interface Tree
+interface ConfigTree
 {
     /**
      * @return array
@@ -10,7 +10,7 @@ interface Tree
 
     /**
      * @param array $arrayToMergeIn
-     * @return Tree
+     * @return ConfigTree
      */
     public function mergeWithArray($arrayToMergeIn);
 }

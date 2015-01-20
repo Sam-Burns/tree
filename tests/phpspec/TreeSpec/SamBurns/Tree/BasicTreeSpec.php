@@ -3,7 +3,7 @@ namespace TreeSpec\SamBurns;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use SamBurns\Tree;
+use SamBurns\Tree\BasicTree;
 use SamBurns\Tree\File\FileFactory;
 
 class TreeSpec extends ObjectBehavior
@@ -52,7 +52,7 @@ class TreeSpec extends ObjectBehavior
             )
         );
 
-        $this->mergeWithArray($newDataArray)->shouldBeLike(new Tree($expectedResultArray));
+        $this->mergeWithArray($newDataArray)->shouldBeLike(new BasicTree($expectedResultArray));
     }
 
     function merging_with_an_array_prioritises_new_array_when_there_are_key_clashes(FileFactory $fileFactory)
@@ -75,7 +75,7 @@ class TreeSpec extends ObjectBehavior
             )
         );
 
-        $this->mergeWithArray($newDataArray)->shouldBeLike(new Tree($expectedArray, $fileFactory));
+        $this->mergeWithArray($newDataArray)->shouldBeLike(new BasicTree($expectedArray, $fileFactory));
     }
 
 //    function it_can_merge_in_file_contents()
