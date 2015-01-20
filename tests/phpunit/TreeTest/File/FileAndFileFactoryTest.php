@@ -33,4 +33,13 @@ class FileFactoryTest extends PHPUnit_Framework_TestCase
             array(__DIR__ . '/../../fixtures/sample.php'),
         );
     }
+
+    /**
+     * @expectedException \SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist
+     */
+    public function testExceptionIfFileDoesntExist()
+    {
+        $fileFactory = new FileFactory;
+        $fileFactory->getFile('/none/existent/file');
+    }
 }
