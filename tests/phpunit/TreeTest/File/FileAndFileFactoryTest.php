@@ -31,6 +31,7 @@ class FileFactoryTest extends PHPUnit_Framework_TestCase
         return array(
             array(__DIR__ . '/../../fixtures/sample.json'),
             array(__DIR__ . '/../../fixtures/sample.php'),
+//            array(__DIR__ . '/../../fixtures/sample.xml'),
         );
     }
 
@@ -41,5 +42,14 @@ class FileFactoryTest extends PHPUnit_Framework_TestCase
     {
         $fileFactory = new FileFactory;
         $fileFactory->getFile('/none/existent/file');
+    }
+
+    /**
+     * @expectedException \SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType
+     */
+    public function testExceptionIfFileTypeUnsupported()
+    {
+        $fileFactory = new FileFactory;
+        $fileFactory->getFile(__DIR__ . '/../../fixtures/sample.unsupported');
     }
 }

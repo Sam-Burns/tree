@@ -4,11 +4,13 @@ namespace SamBurns\Tree\FileParsing;
 use SamBurns\Tree\FileParsing\File\JsonFile;
 use SamBurns\Tree\FileParsing\File\PhpArrayFile;
 use SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist;
+use SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType;
 
 class FileFactory
 {
     /**
      * @throws FileDoesNotExist
+     * @throws CannotParseFileType
      *
      * @param string $path
      * @return File
@@ -30,6 +32,8 @@ class FileFactory
                 return new PhpArrayFile($path);
         }
 
-        return new JsonFile($path);
+        $exception = new CannotParseFileType();
+        $exception->setPath($path);
+        throw $exception;
     }
 }
