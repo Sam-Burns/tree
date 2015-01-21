@@ -6,7 +6,8 @@
     "licence": "MIT",
 
     "require": {
-        "symfony/yaml": "2.6.3"
+        "zendframework/zend-config": "2.2.6",
+        "symfony/yaml":              "2.6.3"
     },
 
     "require-dev": {
