@@ -3,6 +3,8 @@ namespace SamBurns\Tree;
 
 use SamBurns\Tree;
 use SamBurns\Tree\FileParsing\FileFactory;
+use SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType;
+use SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist;
 
 class Config implements Tree, ConfigFromFile
 {
@@ -13,11 +15,11 @@ class Config implements Tree, ConfigFromFile
     private $fileFactory;
 
     /**
-     * @param FileFactory $fileFactory
+     * @param FileFactory|null $fileFactory
      */
-    public function __construct(FileFactory $fileFactory)
+    public function __construct(FileFactory $fileFactory = null)
     {
-        $this->fileFactory = $fileFactory;
+        $this->fileFactory = $fileFactory ?: new FileFactory();
     }
 
     /**
@@ -38,8 +40,24 @@ class Config implements Tree, ConfigFromFile
         return $this;
     }
 
-    public function populateFromFile($argument1)
+    /**
+     * @throws CannotParseFileType
+     * @throws FileDoesNotExist
+     *
+     * @param string $path
+     */
+    public function populateFromFile($path)
     {
-        // TODO: write logic here
+        $file = $this->fileFactory->getFile($path);
+        $this->tree = new BasicTree($file->toArray());
+    }
+
+    /**
+     * @param Config $config
+     * @return Config
+     */
+    public function mergeWithConfig(Config $config)
+    {
+        return $this->mergeWithArray($config->toArray());
     }
 }

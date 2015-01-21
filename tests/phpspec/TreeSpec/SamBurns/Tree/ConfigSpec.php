@@ -3,6 +3,7 @@ namespace TreeSpec\SamBurns\Tree;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SamBurns\Tree\FileParsing\File;
 use SamBurns\Tree\FileParsing\FileFactory;
 
 class ConfigSpec extends ObjectBehavior
@@ -22,9 +23,19 @@ class ConfigSpec extends ObjectBehavior
         $this->shouldHaveType('SamBurns\Tree');
     }
 
-    function it_can_be_populated_from_a_file(FileFactory $fileFactory)
+    function it_can_be_populated_from_a_file(FileFactory $fileFactory, File $file)
     {
-        $fileFactory->getFile('/path/')->willReturn(array('hello_world'));
+        $sampleArray = array(
+            'root-node' => array(
+                'another-node' => 'leaf'
+            )
+        );
+
+        $fileFactory->getFile('/path/')->willReturn($file);
+        $file->toArray()->willReturn($sampleArray);
+
         $this->populateFromFile('/path/');
+
+        $this->toArray()->shouldReturn($sampleArray);
     }
 }

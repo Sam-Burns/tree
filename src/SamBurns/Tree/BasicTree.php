@@ -3,7 +3,7 @@ namespace SamBurns\Tree;
 
 use SamBurns\Tree;
 
-class BasicTree
+class BasicTree implements Tree
 {
     /** @var array */
     private $nodes;
@@ -52,7 +52,7 @@ class BasicTree
     public function mergeWithArray($arrayToMergeIn)
     {
         return new static(
-            array_merge_recursive(
+            array_replace_recursive(
                 $this->toArray(),
                 $arrayToMergeIn
             )
