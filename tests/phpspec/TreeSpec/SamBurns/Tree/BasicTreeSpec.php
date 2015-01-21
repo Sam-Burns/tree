@@ -1,11 +1,11 @@
 <?php
-namespace TreeSpec\SamBurns;
+namespace TreeSpec\SamBurns\Tree;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SamBurns\Tree\BasicTree;
 
-class TreeSpec extends ObjectBehavior
+class BasicTreeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -75,5 +75,22 @@ class TreeSpec extends ObjectBehavior
         );
 
         $this->mergeWithArray($newDataArray)->shouldBeLike(new BasicTree($expectedArray));
+    }
+
+    function it_can_get_subtrees()
+    {
+        $this->getFromPath('node/another-node')->shouldBeLike(
+            new BasicTree(
+                array(
+                    'another-leaf'     => 'orig',
+                    'yet-another-leaf' => 'orig'
+                )
+            )
+        );
+    }
+
+    function it_can_get_from_path()
+    {
+        $this->getFromPath('node/initial-leaf-node')->shouldReturn('orig');
     }
 }

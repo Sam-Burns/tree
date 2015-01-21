@@ -58,4 +58,50 @@ class BasicTree implements Tree
             )
         );
     }
+
+    /**
+     * @param  string $nodeKey
+     * @return mixed
+     */
+    public function get($nodeKey)
+    {
+        if (!isset($this->nodes[$nodeKey])) {
+            return null;
+        }
+
+        return $this->nodes[$nodeKey];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function set($key, $value)
+    {
+        if (is_array($value)) {
+            $this->nodes[$key] = new static($value);
+        }
+        $this->nodes[$key] = $value;
+    }
+
+    /**
+     * @param  string $slashDelimitedPath
+     * @return mixed
+     */
+    public function getFromPath($slashDelimitedPath)
+    {
+        $settingsHierarchy = explode('/', $slashDelimitedPath);
+
+        $currentConfig = $this;
+
+        foreach ($settingsHierarchy as $settingName) {
+            if (!$currentConfig instanceof Tree) {
+                return null;
+            }
+
+            $currentConfig = $currentConfig->get($settingName);
+        }
+
+        return $currentConfig;
+    }
 }

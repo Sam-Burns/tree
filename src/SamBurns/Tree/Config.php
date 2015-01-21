@@ -23,6 +23,25 @@ class Config implements Tree, ConfigFromFile
     }
 
     /**
+     * @param BasicTree $basicTree
+     * @return Config
+     */
+    private static function constructFromBasicTree(BasicTree $basicTree)
+    {
+        $newConfig = new static();
+        $newConfig->setBasicTree($basicTree);
+        return $newConfig;
+    }
+
+    /**
+     * @param BasicTree $basicTree
+     */
+    private function setBasicTree(BasicTree $basicTree)
+    {
+        $this->tree = $basicTree;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -59,5 +78,40 @@ class Config implements Tree, ConfigFromFile
     public function mergeWithConfig(Config $config)
     {
         return $this->mergeWithArray($config->toArray());
+    }
+
+    /**
+     * @param  string $nodeKey
+     * @return mixed
+     */
+    public function get($nodeKey)
+    {
+        $valueInTree = $this->tree->get($nodeKey);
+        if ($valueInTree instanceof BasicTree) {
+            return static::constructFromBasicTree($valueInTree);
+        }
+        return $valueInTree;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function set($key, $value)
+    {
+        $this->tree->set($key, $value);
+    }
+
+    /**
+     * @param  string $slashDelimitedPath
+     * @return mixed
+     */
+    public function getFromPath($slashDelimitedPath)
+    {
+        $valueInTree = $this->tree->getFromPath($slashDelimitedPath);
+        if ($valueInTree instanceof BasicTree) {
+            return static::constructFromBasicTree($valueInTree);
+        }
+        return $valueInTree;
     }
 }
