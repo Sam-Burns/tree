@@ -1,28 +1,33 @@
 <?php
 namespace SamBurns\Tree;
 
-use SamBurns\Tree;
-
-class BasicTree implements Tree
+class BasicTree implements Tree, ArrayableTree
 {
     /** @var array */
-    private $nodes;
+    private $nodes = array();
 
     /**
-     * @param array|null       $initialArray
+     * @param array|null $initialArray
      */
     public function __construct($initialArray = array())
     {
+        $this->populateFromArray($initialArray);
+    }
+
+    /**
+     * Clobbers original array
+     *
+     * @param array|null $arrayToPopulateFrom
+     */
+    public function populateFromArray($arrayToPopulateFrom)
+    {
         $this->nodes = array();
 
-        if ($initialArray) {
-
-            foreach ($initialArray as $key => $initialArrayElement) {
-                if (is_array($initialArrayElement)) {
-                    $this->nodes[$key] = new static($initialArrayElement);
-                } else {
-                    $this->nodes[$key] = $initialArrayElement;
-                }
+        foreach ($arrayToPopulateFrom as $key => $arrayElement) {
+            if (is_array($arrayElement)) {
+                $this->nodes[$key] = new static($arrayElement);
+            } else {
+                $this->nodes[$key] = $arrayElement;
             }
         }
     }
@@ -46,17 +51,28 @@ class BasicTree implements Tree
     }
 
     /**
+     * Incoming array takes precedence in the event of key clashes
+     *
      * @param array $arrayToMergeIn
+     */
+    public function mergeInArray($arrayToMergeIn)
+    {
+        $mergedArray = array_replace_recursive(
+            $this->toArray(),
+            $arrayToMergeIn
+        );
+        $this->populateFromArray($mergedArray);
+    }
+
+    /**
+     * Incoming tree takes precedence in the event of key clashes
+     *
+     * @param ArrayableTree $treeToMergeIn
      * @return Tree
      */
-    public function mergeWithArray($arrayToMergeIn)
+    public function mergeInTree(ArrayableTree $treeToMergeIn)
     {
-        return new static(
-            array_replace_recursive(
-                $this->toArray(),
-                $arrayToMergeIn
-            )
-        );
+        $this->mergeInArray($treeToMergeIn->toArray());
     }
 
     /**

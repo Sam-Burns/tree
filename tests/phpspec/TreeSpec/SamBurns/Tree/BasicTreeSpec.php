@@ -51,7 +51,8 @@ class BasicTreeSpec extends ObjectBehavior
             )
         );
 
-        $this->mergeWithArray($newDataArray)->shouldBeLike(new BasicTree($expectedResultArray));
+        $this->mergeInArray($newDataArray);
+        $this->toArray()->shouldBeLike($expectedResultArray);
     }
 
     function merging_with_an_array_prioritises_new_array_when_there_are_key_clashes()
@@ -74,7 +75,8 @@ class BasicTreeSpec extends ObjectBehavior
             )
         );
 
-        $this->mergeWithArray($newDataArray)->shouldBeLike(new BasicTree($expectedArray));
+        $this->mergeWithArray($newDataArray);
+        $this->toArray()->shouldBeLike($expectedArray);
     }
 
     function it_can_get_subtrees()

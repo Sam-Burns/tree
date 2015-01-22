@@ -2,7 +2,7 @@
 namespace TreeTest\OverallIntegration;
 
 use PHPUnit_Framework_TestCase;
-use SamBurns\Tree\Config;
+use SamBurns\Tree\ConfigTree;
 
 class OverallIntegrationTest extends PHPUnit_Framework_TestCase
 {
@@ -10,15 +10,15 @@ class OverallIntegrationTest extends PHPUnit_Framework_TestCase
     {
         // ARRANGE
 
-        $config1 = new Config();
+        $config1 = new ConfigTree();
         $config1->populateFromFile(__DIR__ . '/../../fixtures/mergeable_sample_1.json');
 
-        $config2 = new Config();
+        $config2 = new ConfigTree();
         $config2->populateFromFile(__DIR__ . '/../../fixtures/mergeable_sample_2.php');
 
         // ACT
 
-        $config3 = $config1->mergeWithConfig($config2);
+        $config1->mergeInTree($config2);
 
         // ASSERT
 
@@ -29,6 +29,6 @@ class OverallIntegrationTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertEquals($expectedResult, $config3->toArray());
+        $this->assertEquals($expectedResult, $config1->toArray());
     }
 }
