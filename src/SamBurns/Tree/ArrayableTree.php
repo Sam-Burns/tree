@@ -1,7 +1,7 @@
 <?php
 namespace SamBurns\Tree;
 
-interface ArrayableTree extends Tree
+interface ArrayableTree
 {
     /**
      * @return array
