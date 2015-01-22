@@ -13,7 +13,7 @@ interface ConfigFromFile
 
     /**
      * @param array $arrayToMergeIn
-     * @return Config
+     * @return ConfigFromFile
      */
     public function mergeWithArray($arrayToMergeIn);
 
@@ -26,8 +26,8 @@ interface ConfigFromFile
     public function populateFromFile($path);
 
     /**
-     * @param Config $config
-     * @return Config
+     * @param ConfigFromFile $config
+     * @return ConfigFromFile
      */
-    public function mergeWithConfig(Config $config);
+    public function mergeWithConfig(ConfigFromFile $config);
 }

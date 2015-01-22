@@ -23,6 +23,14 @@ class Config implements Tree, ConfigFromFile
     }
 
     /**
+     * @param array $arrayToPopulateWith
+     */
+    public function populateFromArray($arrayToPopulateWith)
+    {
+        $this->tree->mergeWithArray($arrayToPopulateWith);
+    }
+
+    /**
      * @param BasicTree $basicTree
      * @return Config
      */
@@ -51,7 +59,7 @@ class Config implements Tree, ConfigFromFile
 
     /**
      * @param array $arrayToMergeIn
-     * @return Config
+     * @return ConfigFromFile
      */
     public function mergeWithArray($arrayToMergeIn)
     {
@@ -72,10 +80,10 @@ class Config implements Tree, ConfigFromFile
     }
 
     /**
-     * @param Config $config
-     * @return Config
+     * @param ConfigFromFile $config
+     * @return ConfigFromFile
      */
-    public function mergeWithConfig(Config $config)
+    public function mergeWithConfig(ConfigFromFile $config)
     {
         return $this->mergeWithArray($config->toArray());
     }
