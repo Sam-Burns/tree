@@ -81,10 +81,10 @@ class Config implements Tree, ConfigFromFile, ArrayableConfig
     }
 
     /**
-     * @param ConfigFromFile $config
+     * @param ArrayableConfig $config
      * @return ConfigFromFile
      */
-    public function mergeWithConfig(ConfigFromFile $config)
+    public function mergeWithConfig(ArrayableConfig $config)
     {
         return $this->mergeWithArray($config->toArray());
     }

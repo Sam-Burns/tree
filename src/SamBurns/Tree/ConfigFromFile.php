@@ -26,8 +26,8 @@ interface ConfigFromFile
     public function populateFromFile($path);
 
     /**
-     * @param ConfigFromFile $config
+     * @param ArrayableConfig $config
      * @return ConfigFromFile
      */
-    public function mergeWithConfig(ConfigFromFile $config);
+    public function mergeWithConfig(ArrayableConfig $config);
 }
