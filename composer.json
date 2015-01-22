@@ -1,9 +1,9 @@
 {
     "name": "samburns/tree",
 
-    "version": "0.1.0",
+    "version": "0.1.1",
 
-    "licence": "MIT",
+    "license": "MIT",
 
     "require": {
         "zendframework/zend-config": "2.2.6",
