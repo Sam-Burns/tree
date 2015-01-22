@@ -6,7 +6,7 @@ use SamBurns\Tree\FileParsing\FileFactory;
 use SamBurns\Tree\FileParsing\File\Exception\CannotParseFileType;
 use SamBurns\Tree\FileParsing\File\Exception\FileDoesNotExist;
 
-class Config implements Tree, ConfigFromFile
+class Config implements Tree, ConfigFromFile, ArrayableConfig
 {
     /** @var BasicTree */
     private $tree;
@@ -20,6 +20,7 @@ class Config implements Tree, ConfigFromFile
     public function __construct(FileFactory $fileFactory = null)
     {
         $this->fileFactory = $fileFactory ?: new FileFactory();
+        $this->tree = new BasicTree();
     }
 
     /**
